@@ -3,10 +3,10 @@ self.addEventListener('install', function (e) {
     e.waitUntil(
         caches.open('shoplist-cache').then(function (cache) {
             return cache.addAll([
-                '/Shoplist/',
-                '/Shoplist/index.html',
-                '/Shoplist/style.css',
-                '/Shoplist/script.js'
+                '/',
+                'index.html',
+                'css/style.css',
+                'js/script.js'
             ]);
         })
     );
