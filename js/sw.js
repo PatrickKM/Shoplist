@@ -1,6 +1,7 @@
+/*Installing a service worker, with the name shoplist-cache*/
 self.addEventListener('install', function (e) {
     e.waitUntil(
-        caches.open('video-store').then(function (cache) {
+        caches.open('shoplist-cache').then(function (cache) {
             return cache.addAll([
                 '/Shoplist/',
                 '/Shoplist/index.html',
