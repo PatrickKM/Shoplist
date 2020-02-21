@@ -1,12 +1,26 @@
 /*Installing a service worker, with the name shoplist-cache*/
+// self.addEventListener('install', function (e) {
+//    e.waitUntil(
+//        caches.open('shoplist-cache').then(function (cache) {
+//            return cache.addAll([
+//                '/',
+//                'Shoplist/index.html',
+//                'Shoplist/css/style.css',
+//                'Shoplist/js/script.js'
+//            ]);
+//        })
+//    );
+// });
+
+/*Installing a service worker, with the name shoplist-cache*/
 self.addEventListener('install', function (e) {
     e.waitUntil(
         caches.open('shoplist-cache').then(function (cache) {
             return cache.addAll([
-                '/',
-                'index.html',
-                'css/style.css',
-                'js/script.js'
+                'Shoplist/',
+                'Shoplist/index.html',
+                'Shoplist/css/style.css',
+                'Shoplist/js/script.js'
             ]);
         })
     );

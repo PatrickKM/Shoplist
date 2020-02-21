@@ -21,10 +21,9 @@
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-        .register('Shoplist/sw.js')
+        .register('/Shoplist/sw.js')
         .then(function () { console.log('Service Worker Registered'); });
 }
-
 
 // Code to handle install prompt on desktop
 
