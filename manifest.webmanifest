@@ -1,0 +1,10 @@
+{
+    "name": "Shopping List",
+    "short_name": "Shoplist",
+    "theme_color": "#095d9f",
+    "background_color": "#818181",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "https://patrickkm.github.io/Shoplist"
+}
