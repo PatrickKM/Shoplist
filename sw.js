@@ -7,7 +7,7 @@ const filesToCache = [
 ];
 
 //const staticCacheName = 'pages-cache-v1';
-var staticCacheName = 'shoplist-v1';
+var staticCacheName = 'shoplist-v3';
 
 
 
