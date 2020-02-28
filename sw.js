@@ -32,7 +32,8 @@ self.addEventListener('fetch', event => {
                 }
                 console.log('Network request for ', event.request.url);
                 return fetch(event.request).then(response => {
-                    // TODO 4 - Add fetched files to the cache, we first cache the pages then the user viset the pages, if the user is offline
+                    // TODO 4 - Add fetched files to the cache, 
+                    //we first cache the pages then the user viset the pages, if the user is offline
                     return caches.open(staticCacheName).then(function (cache) {
                         cache.put(event.request.url, response.clone())
                         return response;
