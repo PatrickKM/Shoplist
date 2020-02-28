@@ -1,27 +1,25 @@
-// Installing a service worker, with the name shoplist-cache
-self.addEventListener('install', function (e) {
-    e.waitUntil(
-        caches.open('shoplist-cache').then(function (cache) {
-            return cache.addAll([
-                '/Shoplist/',
-                '/Shoplist/index.html',
-                '/Shoplist/style.css',
-                '/Shoplist/script.js',
-                '/Shoplist/offline.html'
-            ]);
-        })
+const filesToCache = [
+    '/Shoplist/',
+    '/Shoplist/index.html',
+    '/Shoplist/style.css',
+    '/Shoplist/script.js',
+    '/Shoplist/offline.html'
+];
+
+//const staticCacheName = 'pages-cache-v1';
+var staticCacheName = 'shoplist-v1';
+
+
+
+self.addEventListener('install', event => {
+    console.log('Attempting to install service worker and cache static assets');
+    event.waitUntil(
+        caches.open(staticCacheName)
+            .then(cache => {
+                return cache.addAll(filesToCache);
+            })
     );
 });
-
-// self.addEventListener('fetch', function (e) 
-// {
-//     console.log(e.request.url);
-//     e.respondWith(
-//         caches.match(e.request).then(function (response) {
-//             return response || fetch(e.request);
-//         })
-//     );
-// });
 
 self.addEventListener('fetch', event => {
     console.log('Fetch event for ', event.request.url);
