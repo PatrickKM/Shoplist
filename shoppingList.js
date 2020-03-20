@@ -55,3 +55,30 @@ function newElement() {
         }
     }
 }
+
+// Create a new list when clicking on the "Add new shopping list" button
+function newShoppingList() {
+    var div = document.createElement("div");
+    var shoppingListInputValue = document.getElementById("myShoppingListInput").value;
+    var textnodeShoppingListInputValue = document.createTextNode(shoppingListInputValue);
+    div.appendChild(textnodeShoppingListInputValue);
+    if (textnodeShoppingListInputValue === '') {
+        alert("You must name your shopping list");
+    } else {
+        document.getElementById("myShoppingListBox").appendChild(div);
+    }
+    document.getElementById("myShoppingListInput").value = "";
+
+    var span = document.createElement("SPAN");
+    var txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    div.appendChild(span);
+
+    for (i = 0; i < close.length; i++) {
+        close[i].onclick = function() {
+            var div = this.parentElement;
+            div.style.display = "none";
+        }
+    }
+}
