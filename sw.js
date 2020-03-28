@@ -1,12 +1,12 @@
-importScripts("/Shoplist/shop-store.js"); // importing the store.
+importScripts("/shop-store.js");
 
 const filesToCache = [
-  "/Shoplist/",
-  "/Shoplist/index.html",
-  "/Shoplist/style.css",
-  "/Shoplist/script.js",
-  "/Shoplist/offline.html",
-  "/Shoplist/shop-store.js"
+  "/",
+  "/index.html",
+  "/style.css",
+  "/script.js",
+  "/offline.html",
+  "/shop-store.js"
 ];
 
 //const staticCacheName = 'pages-cache-v1';

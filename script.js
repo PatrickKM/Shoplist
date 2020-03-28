@@ -20,10 +20,8 @@
 //}
 
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/Shoplist/sw.js").then(function() {
+  navigator.serviceWorker.register("sw.js").then(function() {
     console.log("Service Worker Registered");
-
-    // .register('/Shoplist/sw.js')
   });
 }
 

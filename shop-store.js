@@ -1,6 +1,61 @@
-var dbVersion = 1; //this is for migrations, everytime we change something for in the store file, we have to increase det version number.
+var dbVersion = 3; //this is for migrations, everytime we change something for in the store file, we have to increase det version number.
 var dbName = "shoplist"; // is the name of the IndexedDB database
 
-if (self.IndexedDB) {
-  console.log("IndexedDB is supported");
-}
+/*Need to be wrrapped in functions so, we can call the CRUD operation from the index page.
+
+what to do?
+
+
+*/
+
+var request = indexedDB.open(dbName, dbVersion);
+
+request.onerror = function(event) {
+  console.log("Database error: ", event.target.error);
+};
+
+request.onupgradeneeded = function(event) {
+  var db = event.target.result;
+
+  //items object store
+  if (!db.objectStoreNames.contains("items")) {
+    db.createObjectStore("items", { keyPath: "item_number" });
+  }
+
+  //shoplist object store
+  if (!db.objectStoreNames.contains("shoppinglist")) {
+    var shoppinglistStore = db.createObjectStore("shoppinglist", {
+      autoIncrement: true
+    });
+    shoppinglistStore.createIndex("from_idx", "shoplist_name", {
+      unique: false
+    });
+  }
+};
+
+request.onsuccess = function(event) {
+  var db = event.target.result;
+  //the dummydata
+  var dummyData = [
+    { item_number: "01", product_name: "Iphone 7", product_color: "Black" },
+    { item_number: "02", product_name: "Iphone 8", product_color: "Black" },
+    {
+      item_number: "03",
+      product_name: "Samsung Galaxy A10",
+      product_color: "Black"
+    }
+  ];
+
+  //transaction
+  var itemTransaction = db.transaction("items", "readwrite"); // gives permission to read and write..
+  itemTransaction.onerror = function(event) {
+    console.log("Error: ", event.target.error);
+  };
+
+  // the store were we parse the data
+  var itemStore = itemTransaction.objectStore("items");
+
+  for (var i = 0; i < dummyData.length; i++) {
+    itemStore.add(dummyData[i]);
+  }
+};
