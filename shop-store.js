@@ -8,10 +8,16 @@ what to do?
 
 */
 
-$(document).ready(function() {
-  // Handler for .ready() called.
-  addObjectStores();
-});
+// pass a function reference
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+    // your code goes here
+    addObjectStores();
+    fetchShoplist();
+  },
+  false
+);
 
 var addObjectStores = function() {
   // var shoppinglistInput = document.getElementById("shoppinglistInput").value;
@@ -56,23 +62,28 @@ var addShoplistItem = function(event) {
 };
 
 var fetchShoplist = function(event) {
-  //dont think it works...
-  var db = event.target.result;
-  let transaction = db.transaction("shoplist");
-  let books = transaction.objectStore("shoplist");
+  var request = indexedDB.open(dbName, dbVersion);
+  request.onsuccess = function(event) {
+    var db = event.target.result;
+    var transaction = db.transaction("shoplist", "readwrite");
+    var store = transaction.objectStore("shoplist");
+    var request = store.openCursor();
+    var s = "";
 
-  let request = books.openCursor();
+    request.onsuccess = function(event) {
+      var cursor = event.target.result;
 
-  // called for each book found by the cursor
-  request.onsuccess = function() {
-    let cursor = request.result;
-    if (cursor) {
-      let key = cursor.key; // book key (id field)
-      let value = cursor.value; // book object
-      console.log(key, value);
-      cursor.continue();
-    } else {
-      console.log("No more books");
-    }
+      if (cursor) {
+        console.log(cursor.key);
+
+        for (var field in cursor.value.name) {
+          s += cursor.value.name[field];
+        }
+
+        cursor.continue();
+      }
+
+      $("#todo-items").html(s);
+    };
   };
 };
