@@ -5,6 +5,9 @@ var dbName = "shoplist"; // is the name of the IndexedDB database
 
 what to do?
 
+- Deleting items
+
+
 
 */
 
@@ -15,6 +18,7 @@ document.addEventListener(
     // your code goes here
     addObjectStores();
     fetchShoplist();
+    fetchItemlist();
   },
   false
 );
@@ -34,7 +38,7 @@ var addObjectStores = function() {
     }
 
     if (!db.objectStoreNames.contains("items")) {
-      db.createObjectStore("items", { keyPath: "item_number" });
+      db.createObjectStore("items", { keyPath: "timestamp" });
     }
   };
 };
@@ -74,7 +78,7 @@ var fetchShoplist = function(event) {
       var cursor = event.target.result;
 
       if (cursor) {
-        console.log(cursor.key);
+        //  console.log(cursor.key);
 
         for (var field in cursor.value.name) {
           s += cursor.value.name[field];
@@ -83,7 +87,55 @@ var fetchShoplist = function(event) {
         cursor.continue();
       }
 
-      $("#todo-items").html(s);
+      $("#shoplist-items").html(s);
+    };
+  };
+};
+
+var addItem = function(event) {
+  var input = document.getElementById("addListItem").value;
+
+  var request = indexedDB.open(dbName, dbVersion);
+  request.onsuccess = function(event) {
+    var db = event.target.result;
+    var transaction = db.transaction(["items"], "readwrite");
+    var store = transaction.objectStore("items");
+
+    var item = {
+      name: input,
+      timestamp: new Date().getTime()
+    };
+    store.add(item);
+    return transaction.complete;
+  };
+};
+
+var fetchItemlist = function(event) {
+  var request = indexedDB.open(dbName, dbVersion);
+  request.onsuccess = function(event) {
+    var db = event.target.result;
+    var transaction = db.transaction("items", "readwrite");
+    var store = transaction.objectStore("items");
+    var request = store.openCursor();
+    var s = "";
+
+    request.onsuccess = function(event) {
+      var cursor = event.target.result;
+
+      if (cursor) {
+        //  console.log(cursor.key);
+        s + "<ul class='list-grup'>";
+        for (var field in cursor.value.name) {
+          s +=
+            "<li class='list-group-item'>" + cursor.value.name[field] + "</li>";
+        }
+        s + "</ul>";
+        cursor.continue();
+      }
+
+      document.getElementById("todo-items").innerHTML = s;
+
+      // $("#todo-items").html(s);
     };
   };
 };

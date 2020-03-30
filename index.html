@@ -46,6 +46,30 @@
       </div>
     </div>
     <div class="container mt-4">
+      <form>
+        <div class="form-row">
+          <div class="col-md-10">
+            <input
+              type="text"
+              id="addListItem"
+              class="form-control addItem"
+              placeholder="Add an item to the shoppinglist and press 'ENTER' "
+              onclick="addItem()"
+            />
+          </div>
+          <div class="col-md-2">
+            <button onclick="addItem()" class="btn btn-success">
+              Add new shoppinglist
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="container mt-4">
+      My shoppinglist:
+      <div id="shoplist-items"></div>
+
+      <hr />
       <div id="todo-items"></div>
     </div>
     <div class="container mt-4">
