@@ -66,12 +66,32 @@
       </form>
     </div>
     <div class="container mt-4">
+      <form>
+        <div class="form-row">
+          <div class="col-md-10">
+            <input
+              type="text"
+              id="delete"
+              class="form-control addItem"
+              placeholder="Type the 'name' to delete the item!  "
+            />
+          </div>
+          <div class="col-md-2">
+            <button onclick="deleteItem()" class="btn btn-success">
+              Delete Item
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="container mt-4">
       My shoppinglist:
       <div id="shoplist-items"></div>
 
       <hr />
       <div id="todo-items"></div>
     </div>
+    <!--     
     <div class="container mt-4">
       <div id="myShoppingListBox" class="header">
         <h2>My Shopping List</h2>
@@ -91,7 +111,7 @@
       </ul>
 
       <button class="add-button">Add to home screen</button>
-    </div>
+    </div> -->
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"

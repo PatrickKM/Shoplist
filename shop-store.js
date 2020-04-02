@@ -101,17 +101,21 @@ var addItem = function(event) {
     var transaction = db.transaction(["items"], "readwrite");
     var store = transaction.objectStore("items");
 
-    var item = {
-      name: input,
-      timestamp: new Date().getTime()
-    };
+    if (!input == "") {
+      var item = {
+        name: input,
+        timestamp: new Date().getTime()
+      };
+    }
+
     store.add(item);
     return transaction.complete;
   };
 };
 
-var fetchItemlist = function(event) {
+var fetchItemlist = function() {
   var request = indexedDB.open(dbName, dbVersion);
+
   request.onsuccess = function(event) {
     var db = event.target.result;
     var transaction = db.transaction("items", "readwrite");
@@ -123,19 +127,37 @@ var fetchItemlist = function(event) {
       var cursor = event.target.result;
 
       if (cursor) {
-        //  console.log(cursor.key);
-        s + "<ul class='list-grup'>";
         for (var field in cursor.value.name) {
-          s +=
-            "<li class='list-group-item'>" + cursor.value.name[field] + "</li>";
+          s += cursor.value.name[field];
         }
-        s + "</ul>";
+
         cursor.continue();
       }
 
       document.getElementById("todo-items").innerHTML = s;
+    };
+  };
+};
 
-      // $("#todo-items").html(s);
+var deleteItem = function() {
+  var deleteItem = document.getElementById("delete").value;
+
+  var request = indexedDB.open(dbName, dbVersion);
+  request.onsuccess = function(event) {
+    var db = event.target.result;
+    db
+      .transaction("items", "readwrite")
+      .objectStore("items")
+      .openCursor().onsuccess = function(event) {
+      var cursor = event.target.result;
+      if (!cursor) {
+        return;
+      }
+      var customer = cursor.value;
+      if (customer.name === deleteItem) {
+        cursor.delete();
+      }
+      cursor.continue();
     };
   };
 };
