@@ -1,4 +1,4 @@
-importScripts("/shop-store.js");
+//importScripts("/shop-store.js");
 
 const filesToCache = [
   "/Shoplist/",
