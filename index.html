@@ -12,7 +12,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js" defer></script>
+
     <link rel="manifest" href="manifest.webmanifest" />
 
     <title>Shoplist</title>
@@ -20,8 +20,9 @@
 
   <body>
     <div class="container mt-4">
-      <div class=" hidediv mt-4" id="showdiv">
+      <div class="mt-4" id="showdiv">
         <div class="mt-4">
+          <button class="add-button">Add to home screen</button>
           <form>
             <div class="form-row">
               <div class="col-md-10">
@@ -91,27 +92,6 @@
       <hr />
       <div id="todo-items"></div>
     </div>
-    <!--     
-    <div class="container mt-4">
-      <div id="myShoppingListBox" class="header">
-        <h2>My Shopping List</h2>
-        <div class="mt-4">
-          <input type="text" id="myInput" placeholder="Type in product..." />
-          <span onclick="newElement()" class="addBtn">Add</span>
-        </div>
-      </div>
-
-      <ul id="myShoppingList">
-        <li>Milk</li>
-        <li class="checked">Bread</li>
-        <li>Soda</li>
-        <li>Eggs</li>
-        <li>Chips</li>
-        <li>Pasta</li>
-      </ul>
-
-      <button class="add-button">Add to home screen</button>
-    </div> -->
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -123,7 +103,7 @@
       integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
       crossorigin="anonymous"
     ></script>
-    <script src="shoppingList.js"></script>
     <script src="shop-store.js"></script>
+    <script src="script.js" defer></script>
   </body>
 </html>

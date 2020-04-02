@@ -1,16 +1,16 @@
-importScripts("/shop-store.js");
+importScripts("/Shoplist/shop-store.js");
 
 const filesToCache = [
-  "/",
-  "/index.html",
-  "/style.css",
-  "/script.js",
-  "/offline.html",
-  "/shop-store.js"
+  "/Shoplist/",
+  "/Shoplist/index.html",
+  "/Shoplist/style.css",
+  "/Shoplist/script.js",
+  "/Shoplist/offline.html",
+  "/Shoplist/shop-store.js"
 ];
 
 //const staticCacheName = 'pages-cache-v1';
-var staticCacheName = "shoplist-v3";
+var staticCacheName = "shoplist-v5";
 
 self.addEventListener("install", event => {
   console.log("Attempting to install service worker and cache static assets");
