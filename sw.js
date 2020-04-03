@@ -6,7 +6,10 @@ const filesToCache = [
   "/Shoplist/style.css",
   "/Shoplist/script.js",
   "/Shoplist/offline.html",
-  "/Shoplist/shop-store.js"
+  "/Shoplist/shop-store.js",
+  //Offline ux message
+  "/Shoplist/js/progressive-ui-kitt/themes/flat.css",
+  "/Shoplist/js/progressive-ui-kitt/themes/progressive-ui-kitt.js"
 ];
 
 //const staticCacheName = 'pages-cache-v1';
@@ -42,6 +45,10 @@ self.addEventListener("fetch", event => {
         });
       })
       .catch(error => {
+        ProgressiveKITT.addAlert(
+          "You are currently offline." +
+            "You will still be able to add items to the store.."
+        );
         // TODO 6 - Respond with custom offline page
         console.log("Error, ", error);
         return caches.match("/Shoplist/offline.html");
